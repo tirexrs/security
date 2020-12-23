@@ -30,7 +30,7 @@ def secure(real_user, real_pwd):
 
 def add_to_database(username, password):
     pick(username, password)
-    with open("users_login_info.py", "w") as write:
+    with open("users_login_info.py", "a+") as write:
         write.write(f"""users = {users}
 passwords = {passwords}
 
