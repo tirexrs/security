@@ -1,5 +1,7 @@
 import time
 from users_login_info import *
+from getpass import getpass
+from base64 import b64encode
 
 
 def usr(real_user):
@@ -82,6 +84,7 @@ def login(signup=True):
         else:
             exit()
 
+
 def encrypt_script():
     def read_file(file):
         with open(file, "r") as read:
@@ -93,8 +96,9 @@ def encrypt_script():
             filename += ".py"
         return filename
 
-    def get_file_info(file_input = input("Please enter the python file name: "), encrypted_file_name = input("Type a file name, to save the encrypted code in: ")):
+    def get_file_info():
         print("Welcome to this project. You can here encrypt any python script in seconds!")
+        file_input = input("Please enter the python file name: ")
         file = check_filename(file_input)
         try:
             read = read_file(file)
@@ -106,17 +110,19 @@ def encrypt_script():
 
     def encrypt_code():
         file_content = get_file_info()
+        encrypted_file_name = input("Type a file name, to save the encrypted code in: ")
         encrypted_file_name = check_filename(encrypted_file_name)
         hidden_code = b64encode(file_content.encode())
         with open(encrypted_file_name, "w+") as write:
             write.write(f"""from base64 import b64decode
 
+def show(encrypted):
+    return b64decode(encrypted).decode()
 
-    def show(encrypted):
-        return b64decode(encrypted).decode()
+hidden = {hidden_code}
 
-    hidden = {hidden_code}
-
-    eval(compile(show(hidden), '<string>', 'exec'))""")
+eval(compile(show(hidden), '<string>', 'exec'))""")
 
     encrypt_code()
+    
+    
