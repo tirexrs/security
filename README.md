@@ -6,3 +6,5 @@ If you need to create a login and signup for your script, insteed writing "secur
 You can pass True or False, inside the "security.login()", and if you pass False, the user won't be able to sign up if he doesn't already have a username and a password.
 If you don't pass anything, by default it's value is True.
 Usernames and passwords when you sign up will be saved in users_login_info.py, so the script can access them when you need to login.
+A new feature for this module is now avilable, you can import this module into any blank python script, and after importing, use "security.encrypt_script()", and this will ask you to choose the python file you want to encrypted, and any name to create a new file for the encrypted script.
+So with "security.encrypt_script()", the script will work fine, but you cannot understand what's inside the code, and it can't be reverse engineered (only if the script is re-decrypted).
