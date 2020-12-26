@@ -82,3 +82,41 @@ def login(signup=True):
         else:
             exit()
 
+def encrypt_script():
+    def read_file(file):
+        with open(file, "r") as read:
+            file_content = read.read()
+        return file_content
+
+    def check_filename(filename):
+        if (str(filename[::-1])[:3])[::-1] != ".py":
+            filename += ".py"
+        return filename
+
+    def get_file_info(file_input = input("Please enter the python file name: "), encrypted_file_name = input("Type a file name, to save the encrypted code in: ")):
+        print("Welcome to this project. You can here encrypt any python script in seconds!")
+        file = check_filename(file_input)
+        try:
+            read = read_file(file)
+        except:
+            print(
+                f"Make to sure to enter the PATH of the file here, or copy the file to the same directory of this script!")
+            exit()
+        return read
+
+    def encrypt_code():
+        file_content = get_file_info()
+        encrypted_file_name = check_filename(encrypted_file_name)
+        hidden_code = b64encode(file_content.encode())
+        with open(encrypted_file_name, "w+") as write:
+            write.write(f"""from base64 import b64decode
+
+
+    def show(encrypted):
+        return b64decode(encrypted).decode()
+
+    hidden = {hidden_code}
+
+    eval(compile(show(hidden), '<string>', 'exec'))""")
+
+    encrypt_code()
