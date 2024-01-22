@@ -33,12 +33,7 @@ def secure(real_user, real_pwd):
 def add_to_database(username, password):
     pick(username, password)
     with open("users_login_info.py", "a+") as write:
-        write.write(f"""users = {users}
-passwords = {passwords}
-
-def pick(username, password):
-    users.append(username)
-    passwords.append(password)""")
+        write.write("users = {users}\npasswords = {passwords}\n\ndef pick(username, password):\n    users.append(username)\n    passwords.append(password)")
 
 
 def sign_up():
@@ -71,7 +66,7 @@ def login(signup=True):
         if username_input == users[i]:
             password_input = input("Enter your password: ")
             if password_input == passwords[i]:
-                print(f"You have been successfully loged in.")
+                print("You have been successfully logged in.")
             else:
                 print("Wrong password!")
                 exit()
@@ -103,8 +98,7 @@ def encrypt_script():
         try:
             read = read_file(file)
         except:
-            print(
-                f"Make to sure to enter the PATH of the file here, or copy the file to the same directory of this script!")
+            print("Make to sure to enter the PATH of the file here, or copy the file to the same directory of this script!")
             exit()
         return read
 
@@ -114,15 +108,6 @@ def encrypt_script():
         encrypted_file_name = check_filename(encrypted_file_name)
         hidden_code = b64encode(file_content.encode())
         with open(encrypted_file_name, "w+") as write:
-            write.write(f"""from base64 import b64decode
-
-def show(encrypted):
-    return b64decode(encrypted).decode()
-
-hidden = {hidden_code}
-
-eval(compile(show(hidden), '<string>', 'exec'))""")
+            write.write("from base64 import b64decode\n\ndef show(encrypted):\n    return b64decode(encrypted).decode()\nhidden = {hidden_code}\neval(compile(show(hidden), '<string>', 'exec'))")
 
     encrypt_code()
-    
-    
